@@ -42,7 +42,7 @@ function Home() {
     console.log("subsequent renders");
     console.log(start);
     if (start) {
-      let time;
+      let time ;
       if (bgcolor.type === 'mainClock') {
         if (timer.pomodoro === 0) {
           console.log('timer component clock out');
@@ -52,30 +52,30 @@ function Home() {
           time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak }
         }
       }
-      else if (bgcolor.type === 'shortClock') {
-        if (timer.shortBreak === 0) {
-          console.log('timer component clock out');
-          clearInterval(tick.current);
-          setStart(false);
-          backgroundChange("rgb(186, 73, 73)", "mainClock");
-          pomodorotime();
-        } else {
-          time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: timer.longBreak }
-        }
-      }
-      else if (bgcolor.type === 'longClock') {
-        if (timer.pomodoro === 0) {
-          console.log('timer component clock out');
-          clearInterval(tick.current);
-          setStart(false);
-          backgroundChange("rgb(186, 73, 73)", "mainClock");
-          pomodorotime();
-        } else {
-          time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak - 1 }
-        }
-      }
+      // else if (bgcolor.type === 'shortClock') {
+      //   if (timer.shortBreak === 0) {
+      //     console.log('timer component clock out');
+      //     clearInterval(tick.current);
+      //     setStart(false);
+      //     backgroundChange("rgb(186, 73, 73)", "mainClock");
+      //     pomodorotime();
+      //   } else {
+      //     time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: timer.longBreak }
+      //   }
+      // }
+      // else if (bgcolor.type === 'longClock') {
+      //   if (timer.pomodoro === 0) {
+      //     console.log('timer component clock out');
+      //     clearInterval(tick.current);                               
+      //     setStart(false);
+      //     backgroundChange("rgb(186, 73, 73)", "mainClock");
+      //     pomodorotime();
+      //   } else {
+      //     time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak - 1 }
+      //   }
+      // }
       tick.current = setInterval(() => {
-        setTimer((timer) => timer=time);
+        setTimer(() => time=time);
 
       }, 1000);
 
