@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import Timer from './Timer.js'
 import Task from './Task.js'
 
-function Home(props) {
+function Home() {
   let pomodoroTime = 20 * 60;
   let shortbreacktime = 5 * 60;
   let longbreacktime = 15 * 60;
@@ -16,14 +16,18 @@ function Home(props) {
     type: 'mainClock'
   }
   const [bgcolor, setColor] = useState(bgcolorType)
-  const [btnColor,setBtnColor] = useState('rgba(0, 0, 0, 0.15)')
+  // const [btnColor,setBtnColor] = useState('rgba(0, 0, 0, 0.15)')
   const backgroundChange = (color, type) => {
     setColor(color = { color: color, type: type });
   }
   useEffect(() => {
     document.body.style.backgroundColor = bgcolor.color;
   })
-
+  const [activebutton, setactivebutton] = useState('first');
+  const clickedbuttonhandler = (name) => {
+    setactivebutton(name);
+    console.log(activebutton);
+  }; 
   const [timer, setTimer] = useState(mainTime);
   const [start, setStart] = useState(false);
   const firstStart = useRef(true);
@@ -35,7 +39,6 @@ function Home(props) {
       firstStart.current = !firstStart.current;
       return;
     }
-
     console.log("subsequent renders");
     console.log(start);
     if (start) {
@@ -72,7 +75,7 @@ function Home(props) {
         }
       }
       tick.current = setInterval(() => {
-        setTimer(() => time);
+        setTimer((timer) => timer=time);
 
       }, 1000);
 
@@ -82,7 +85,7 @@ function Home(props) {
     }
 
     return () => clearInterval(tick.current);
-  },);
+  },[start]);
 
   const toggleStart = () => {
     setStart(!start);
@@ -106,6 +109,16 @@ function Home(props) {
     console.log("longBreack function called : ")
     // setTimer(longbreacktime);
   }
+  let taskName;
+    if (bgcolor.type==='mainClock') {
+      taskName='Time to focus!'
+    } else if(bgcolor.type==='shortClock'){
+      taskName='Time to Shortbreak!'
+    }
+    else if (bgcolor.type==='longClock') {
+      taskName='Time to Longbreak!'
+    }
+    
   return (
     <>
       <div className='home_component' style={{ backgroundColor: bgcolor.color }}>
@@ -116,10 +129,12 @@ function Home(props) {
 
             <div className=' button_col'>
 
-              <button id='pomodoro' onClick={() => { backgroundChange("rgb(186, 73, 73)", "mainClock"); pomodorotime() }}
-              >Pomodoro</button>
-              <button id='shortBreack' onClick={() => { backgroundChange("rgb(56,133,138)", "shortClock"); shortBreack() }}>Short Break</button>
-              <button id='longBreack' onClick={() => { backgroundChange("rgb(57,112,151)", "longClock"); longBreack() }}>Long Break</button>
+              <button id='pomodoro' onClick={() => { backgroundChange("rgb(186, 73, 73)", "mainClock"); pomodorotime();clickedbuttonhandler('first') }}
+              style={{backgroundColor: activebutton==='first'? 'rgba(0, 0, 0, 0.15)':''}} >Pomodoro</button>
+              <button id='shortBreack' onClick={() => { backgroundChange("rgb(56,133,138)", "shortClock"); shortBreack();clickedbuttonhandler('second') }}
+              style={{backgroundColor: activebutton==='second'? 'rgba(0, 0, 0, 0.15)':''}}>Short Break</button>
+              <button id='longBreack' onClick={() => { backgroundChange("rgb(57,112,151)", "longClock"); longBreack();clickedbuttonhandler('third') }}
+              style={{backgroundColor: activebutton==='third'? 'rgba(0, 0, 0, 0.15)':''}} >Long Break</button>
             </div>
             <div className='timer-div '>
 
@@ -138,7 +153,7 @@ function Home(props) {
           </div>
 
           <div className='pomodoro_count text-center'>#1</div>
-          <div className='taskName text-center'>Time to focus!</div>
+        <div className='taskName text-center'>{taskName}</div>
           <Task />
 
         </div>
