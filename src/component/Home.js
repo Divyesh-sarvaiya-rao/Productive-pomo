@@ -16,7 +16,7 @@ function Home(props) {
     type: 'mainClock'
   }
   const [bgcolor, setColor] = useState(bgcolorType)
-
+  const [btnColor,setBtnColor] = useState('rgba(0, 0, 0, 0.15)')
   const backgroundChange = (color, type) => {
     setColor(color = { color: color, type: type });
   }
@@ -39,7 +39,7 @@ function Home(props) {
     console.log("subsequent renders");
     console.log(start);
     if (start) {
-      let time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak, longBreak: timer.longBreak }
+      let time;
       if (bgcolor.type === 'mainClock') {
         if (timer.pomodoro === 0) {
           console.log('timer component clock out');
@@ -82,7 +82,7 @@ function Home(props) {
     }
 
     return () => clearInterval(tick.current);
-  }, [start]);
+  },);
 
   const toggleStart = () => {
     setStart(!start);
