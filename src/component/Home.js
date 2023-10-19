@@ -2,10 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 import Timer from './Timer.js'
 import Task from './Task.js'
 
-function Home() {
-  let pomodoroTime = 20 * 60;
+function Home(props) {
+  console.log('home component Time :',props.taskTime);
+  let pomodoroTime = 25 * 60;
   let shortbreacktime = 5 * 60;
-  let longbreacktime = 15 * 60;
+  let longbreacktime = 15 *60;
+ 
+  // console.log('homeTime::',pomodoroTime);
   const mainTime = {
     pomodoro: pomodoroTime,
     shortBreak: shortbreacktime,
@@ -28,62 +31,70 @@ function Home() {
     setactivebutton(name);
     console.log(activebutton);
   }; 
-  const [timer, setTimer] = useState(mainTime);
+  let [timer, setTimer] = useState(mainTime);
   const [start, setStart] = useState(false);
   const firstStart = useRef(true);
   const tick = useRef();
 
+  // if (props.taskTime) {
+  //   pomodoroTime=props.taskTime.pomodoroTime;
+  //   shortbreacktime=props.taskTime.shortBreakTime;
+  //   longbreacktime=props.taskTime.longbreacktime;
+  //   const mainTime = {
+  //     pomodoro: pomodoroTime * 60,
+  //     shortBreak: shortbreacktime * 60,
+  //     longBreak: longbreacktime * 60
+  //   }
+  //   setTimer(mainTime)
+  // }
   useEffect(() => {
     if (firstStart.current) {
       console.log("first render, don't run useEffect for timer");
       firstStart.current = !firstStart.current;
       return;
     }
-    console.log("subsequent renders");
-    console.log(start);
     if (start) {
-      let time ;
-      if (bgcolor.type === 'mainClock') {
-        if (timer.pomodoro === 0) {
+      let time;
+      tick.current = setInterval(() => {
+        if (bgcolor.type === 'mainClock') {
+        if (timer.pomodoro == 0) {
           console.log('timer component clock out');
           clearInterval(tick.current);
           setStart(false);
         } else {
-          time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak }
+          time = { pomodoro: timer.pomodoro - 1, shortBreak: shortbreacktime, longBreak: longbreacktime }
+        }
+        console.log("mainClock called : ", time);
+      }
+      else if (bgcolor.type === 'shortClock') {
+        if (timer.shortBreak === 0) {
+          console.log('timer component clock out');
+          clearInterval(tick.current);
+          setStart(false);
+          backgroundChange("rgb(186, 73, 73)", "mainClock");
+          pomodorotime();
+          clickedbuttonhandler('first');
+        } else {
+          time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: longbreacktime }
         }
       }
-      // else if (bgcolor.type === 'shortClock') {
-      //   if (timer.shortBreak === 0) {
-      //     console.log('timer component clock out');
-      //     clearInterval(tick.current);
-      //     setStart(false);
-      //     backgroundChange("rgb(186, 73, 73)", "mainClock");
-      //     pomodorotime();
-      //   } else {
-      //     time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: timer.longBreak }
-      //   }
-      // }
-      // else if (bgcolor.type === 'longClock') {
-      //   if (timer.pomodoro === 0) {
-      //     console.log('timer component clock out');
-      //     clearInterval(tick.current);                               
-      //     setStart(false);
-      //     backgroundChange("rgb(186, 73, 73)", "mainClock");
-      //     pomodorotime();
-      //   } else {
-      //     time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak - 1 }
-      //   }
-      // }
-      tick.current = setInterval(() => {
-        setTimer(() => time=time);
-
+      else if (bgcolor.type === 'longClock') {
+        if (timer.longBreak === 0) {
+          console.log('timer component clock out');
+          clearInterval(tick.current);                               
+          setStart(false);
+          backgroundChange("rgb(186, 73, 73)", "mainClock");
+          pomodorotime();
+        } else {
+          time = { pomodoro: timer.pomodoro, shortBreak: shortBreack, longBreak: timer.longBreak - 1 }
+        }
+      }
+        setTimer(() => timer = time);
       }, 1000);
-
     } else {
       console.log("clear interval");
       clearInterval(tick.current);
     }
-
     return () => clearInterval(tick.current);
   },[start]);
 
@@ -99,7 +110,7 @@ function Home() {
   };
   const pomodorotime = () => {
     console.log("pomodoro function called :")
-    // setTimer(time);
+    // setTimer(time);  
   }
   const shortBreack = () => {
     console.log("shortBreack function called : ")
