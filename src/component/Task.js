@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { FaBars } from "react-icons/fa";
-import { FaTrash } from "react-icons/fa";
-import { FaCheckCircle } from 'react-icons/fa'
+import { FaBars,FaCheckCircle,FaTrash,FaPlusCircle } from "react-icons/fa";
 
 function Task() {
 	const [visible, setVisible] = useState(false);
@@ -46,10 +44,10 @@ function Task() {
 			localStorage.setItem('added_task', JSON.stringify(newTask));
 		}
 	}
-	const check_task = () => {
-		console.log("check task called ::");
-		setCheck(true);
-	}
+	// const check_task = () => {
+	// 	console.log("check task called ::");
+	// 	setCheck(!true);
+	// }
 	return (
 		<div className='task_component'>
 			<div className='task_header'>
@@ -62,14 +60,14 @@ function Task() {
 				task.map((taskList, i) => {
 					return (<div className='task_preview' key={i} index={i}>
 						<div id='taskName' style={{ textDecoration: check ? 'line-through' : '' }}>{taskList.taskName}</div>
-						<div className='check_task' onClick={() => { check_task() }}
+						<div className='check_task' onClick={() => { setCheck(!check) }}
 							style={{ color: check ? 'green' : 'white' }}><FaCheckCircle /></div>
 						<div className='delete_task' onClick={() => { deleteTask(taskList.taskId) }}><FaTrash /></div>
 					</div>)
 				})
 			}
 			{!visible && <div className='task_button' onClick={() => setVisible(!visible)}>
-				<strong>+</strong> Add Task
+				<FaPlusCircle />&nbsp; Add Task
 			</div>}
 
 

@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import Timer from './Timer.js'
-import Task from './Task.js'
+import useSound from 'use-sound';
+import Timer from './Timer.js';
+import Task from './Task.js';
+import sound from '../sounds/music2.wav';
 
 function Home(props) {
-  console.log('home component Time :',props.taskTime);
+  // console.log('home component Time :',props.taskTime);
   let pomodoroTime = 25 * 60;
   let shortbreacktime = 5 * 60;
   let longbreacktime = 15 *60;
@@ -19,7 +21,7 @@ function Home(props) {
     type: 'mainClock'
   }
   const [bgcolor, setColor] = useState(bgcolorType)
-  // const [btnColor,setBtnColor] = useState('rgba(0, 0, 0, 0.15)')
+  const [playsound]= useSound(sound)
   const backgroundChange = (color, type) => {
     setColor(color = { color: color, type: type });
   }
@@ -62,6 +64,7 @@ function Home(props) {
           console.log('timer component clock out');
           clearInterval(tick.current);
           setStart(false);
+          playsound();
           if(window.confirm("Your task is completed Do you want to Reset this clock ")){
           time = { pomodoro: pomodoroTime, shortBreak: shortbreacktime, longBreak: longbreacktime }
           }
@@ -74,6 +77,7 @@ function Home(props) {
         if (timer.shortBreak === 0) {
           console.log('timer component clock out');
           clearInterval(tick.current);
+          playsound();
           setStart(false);
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
@@ -86,7 +90,8 @@ function Home(props) {
       else if (bgcolor.type === 'longClock') {
         if (timer.longBreak === 0) {
           console.log('timer component clock out');
-          clearInterval(tick.current);                               
+          clearInterval(tick.current);  
+          playsound();
           setStart(false);
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
