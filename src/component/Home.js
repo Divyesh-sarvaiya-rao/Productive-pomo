@@ -9,7 +9,7 @@ function Home(props) {
   let longbreacktime = 15 *60;
  
   // console.log('homeTime::',pomodoroTime);
-  const mainTime = {
+  let mainTime = {
     pomodoro: pomodoroTime,
     shortBreak: shortbreacktime,
     longBreak: longbreacktime
@@ -29,6 +29,7 @@ function Home(props) {
   const [activebutton, setactivebutton] = useState('first');
   const clickedbuttonhandler = (name) => {
     setactivebutton(name);
+    setStart(false)
     console.log(activebutton);
   }; 
   let [timer, setTimer] = useState(mainTime);
@@ -36,7 +37,7 @@ function Home(props) {
   const firstStart = useRef(true);
   const tick = useRef();
 
-  // if (props.taskTime) {
+  // if (props && props.taskTime) {
   //   pomodoroTime=props.taskTime.pomodoroTime;
   //   shortbreacktime=props.taskTime.shortBreakTime;
   //   longbreacktime=props.taskTime.longbreacktime;
@@ -57,10 +58,13 @@ function Home(props) {
       let time;
       tick.current = setInterval(() => {
         if (bgcolor.type === 'mainClock') {
-        if (timer.pomodoro == 0) {
+        if (timer.pomodoro === 0) {
           console.log('timer component clock out');
           clearInterval(tick.current);
           setStart(false);
+          if(window.confirm("Your task is completed Do you want to Reset this clock ")){
+          time = { pomodoro: pomodoroTime, shortBreak: shortbreacktime, longBreak: longbreacktime }
+          }
         } else {
           time = { pomodoro: timer.pomodoro - 1, shortBreak: shortbreacktime, longBreak: longbreacktime }
         }
@@ -74,6 +78,7 @@ function Home(props) {
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
           clickedbuttonhandler('first');
+          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
         } else {
           time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: longbreacktime }
         }
@@ -85,8 +90,10 @@ function Home(props) {
           setStart(false);
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
+          clickedbuttonhandler('first');
+          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
         } else {
-          time = { pomodoro: timer.pomodoro, shortBreak: shortBreack, longBreak: timer.longBreak - 1 }
+          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: timer.longBreak - 1 }
         }
       }
         setTimer(() => timer = time);

@@ -250,7 +250,7 @@ body{
  .task_preview{
      -webkit-box-align: center;
      -webkit-box-pack: justify;
-     display: flex;
+     display:flex;
      align-items: center;
      width: 100%;
      background-color: #dedede;
@@ -310,7 +310,7 @@ body{
   padding: 10px;
   box-shadow: none;
   border: none;
-  color: rgb(85, 85, 85);
+  color: rgb(172, 169, 169);
   width: 100%;
   box-sizing: border-box;
 }
@@ -329,7 +329,7 @@ body{
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+  box-shadow: rgba(206, 201, 201, 0.2) 0px 2px 2px;
   color: white;
   opacity: 0.9;
   font-size: 14px;
@@ -338,4 +338,9 @@ body{
   background-color: rgb(34, 34, 34);
   border: 2px solid rgb(34, 34, 34);
   display: inline-block;
+}
+
+.check_task{
+  margin-right: 2%;
+  cursor: pointer;
 }

@@ -41,25 +41,25 @@ props.time(time)
 		{visible && <div className='setting_div'>
 				<div className="container">
 					<div className=" timeName"><span>Time (minutes)</span></div>
-					<div class=" time_input_div">
+					<div className=" time_input_div">
 						<div className=" input_div">
 							<label className=" lable_name">Pomodoro</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.pomodoroTime} 
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.pomodoroTime} disabled
 							onChange={e=>{setInputTime({pomodoroTime:e.target.value,shortBreakTime:inputTime.shortBreakTime,longBreakTime:inputTime.longBreakTime})}}/>
 						</div>
 						<div className=" input_div">
 							<label className=" lable_name">Short Break</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.shortBreakTime} 
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.shortBreakTime} disabled
 							onChange={e=>{setInputTime({pomodoroTime:inputTime.pomodoroTime,shortBreakTime:e.target.value,longBreakTime:inputTime.longBreakTime})}}/>
 						</div>
 						<div className=" input_div">
 							<label className=" lable_name">Long Break</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.longBreakTime}
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.longBreakTime} disabled
 							onChange={e=>{setInputTime({pomodoroTime:inputTime.pomodoroTime,shortBreakTime:inputTime.shortBreakTime,longBreakTime:e.target.value})}}/>
 						</div>
 					</div>
 					<div className='setting_done_btn'>
-						<button className='done_btn' onClick={setting_done}>Done</button>
+						<button className='done_btn d-none' onClick={setting_done} >Done</button>
 					</div>
 				</div>
 		</div>}
