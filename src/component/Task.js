@@ -27,6 +27,7 @@ function Task() {
 				taskId: new Date().getTime().toString(),
 				taskName: inputText.taskName,
 				taskTime: inputText.taskTime,
+				taskCheck:false
 			}
 			setTask([...task, inputTask])
 			setInputText(initial);
@@ -44,9 +45,25 @@ function Task() {
 			localStorage.setItem('added_task', JSON.stringify(newTask));
 		}
 	}
-	// const check_task = () => {
-	// 	console.log("check task called ::");
-	// 	setCheck(!true);
+	// const check_task = (id,key) => {
+	// 	console.log("check task called ::",id);
+	// 	const newTask = task.filter((tasklist)=>{
+	// 		// const deleteTask = task.filter((tasklist)=>tasklist.taskId !==id);
+	// 		// setTask([...deleteTask])
+	// 		if (tasklist.taskId===id) {
+				
+	// 			let updated_task={
+	// 				taskId:tasklist.taskId,
+	// 				taskName:tasklist.taskName,
+	// 				taskTime:tasklist.taskTime,
+	// 				taskCheck:true
+	// 			}
+	// 			task.push(updated_task)
+	// 		}
+	// 	})
+	// 	setTask([newTask])
+	// 	console.log(task);
+	// 	// setCheck(!true);
 	// }
 	return (
 		<div className='task_component'>
@@ -69,7 +86,6 @@ function Task() {
 			{!visible && <div className='task_button' onClick={() => setVisible(!visible)}>
 				<FaPlusCircle />&nbsp; Add Task
 			</div>}
-
 
 			{visible && <div className='task_add_box'>
 				<input type='text' className='task_name_input' placeholder='What are you working on?' value={inputText.taskName}

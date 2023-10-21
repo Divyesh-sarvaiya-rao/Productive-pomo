@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import useSound from 'use-sound';
 import Timer from './Timer.js';
 import Task from './Task.js';
-import sound from '../sounds/music2.wav';
+import sound from '../sounds/music.wav';
 
 function Home(props) {
   // console.log('home component Time :',props.taskTime);
@@ -90,7 +90,7 @@ function Home(props) {
       else if (bgcolor.type === 'longClock') {
         if (timer.longBreak === 0) {
           console.log('timer component clock out');
-          clearInterval(tick.current);  
+          clearInterval(tick.current);
           playsound();
           setStart(false);
           backgroundChange("rgb(186, 73, 73)", "mainClock");
@@ -116,10 +116,20 @@ function Home(props) {
 
   const dispSecondsAsMins = (seconds) => {
     console.log("seconds :" + seconds);
-    const mins = Math.floor(seconds / 60);
-    const seconds_ = seconds % 60;
-    return mins.toString() + ":" + (seconds_ === 0 ? "00" : seconds_.toString());
+    let mins = Math.floor(seconds / 60);
+    let seconds_ = seconds % 60;
+    let minsString = mins.toString();
+    let secondsString = seconds_.toString();
+  
+    if (minsString.length === 1) {
+      minsString = "0" + minsString;
+    }
+    if (secondsString.length === 1) {
+      secondsString = "0" + secondsString;
+    }
+    return minsString + ":" + secondsString;
   };
+  
   const pomodorotime = () => {
     console.log("pomodoro function called :")
     // setTimer(time);  
