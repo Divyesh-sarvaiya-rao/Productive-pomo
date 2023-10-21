@@ -62,9 +62,9 @@ function Home(props) {
         if (bgcolor.type === 'mainClock') {
         if (timer.pomodoro === 0) {
           console.log('timer component clock out');
+          playsound();
           clearInterval(tick.current);
           setStart(false);
-          playsound();
           if(window.confirm("Your task is completed Do you want to Reset this clock ")){
           time = { pomodoro: pomodoroTime, shortBreak: shortbreacktime, longBreak: longbreacktime }
           }

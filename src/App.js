@@ -19,4 +19,4 @@ const time=(time)=>{
   );
 }
 
-export default App;
+export default App  
