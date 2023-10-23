@@ -15,9 +15,9 @@ function Task() {
 	else {
 		array = [];
 	}
-	const [check, setCheck] = useState(false);
+	// const [check, setCheck] = useState(false);
 	const [inputText, setInputText] = useState(initial);
-	const [task, setTask] = useState(array);
+	let [task, setTask] = useState(array);
 	const submit = () => {
 		console.log("Task added");
 		if (inputText.taskName === '') {
@@ -45,26 +45,39 @@ function Task() {
 			localStorage.setItem('added_task', JSON.stringify(newTask));
 		}
 	}
-	// const check_task = (id,key) => {
-	// 	console.log("check task called ::",id);
-	// 	const newTask = task.filter((tasklist)=>{
-	// 		// const deleteTask = task.filter((tasklist)=>tasklist.taskId !==id);
-	// 		// setTask([...deleteTask])
-	// 		if (tasklist.taskId===id) {
-				
-	// 			let updated_task={
-	// 				taskId:tasklist.taskId,
-	// 				taskName:tasklist.taskName,
-	// 				taskTime:tasklist.taskTime,
-	// 				taskCheck:true
-	// 			}
-	// 			task.push(updated_task)
-	// 		}
-	// 	})
-	// 	setTask([newTask])
-	// 	console.log(task);
-	// 	// setCheck(!true);
-	// }
+	const check_task = (id) => {
+		console.log("check task called ::",id);
+		const newTask = task.filter((tasklist)=>{
+		// // 	// const deleteTask = task.filter((tasklist)=>tasklist.taskId !==id);
+		// // 	// setTask([...deleteTask])
+			if (tasklist.taskId===id) {
+				let updated_task={
+					taskId:new Date().getTime().toString(),
+					taskName:tasklist.taskName,
+					taskTime:tasklist.taskTime,
+					taskCheck:true
+				}
+				// task.push(updated_task);
+				setTask([...task,updated_task])
+
+			}
+		return task;
+		});
+		// localStorage.setItem('added_task', JSON.stringify(newTask));
+
+		// let newtask = task.filter((tasklist)=> tasklist.taskId !== id);
+		// // newTask.splice(id, 1)
+		// setTask([...task,newtask]);
+		console.log(newTask);
+
+		// let update_task = task.filter((tasklist)=> tasklist.taskId !== id);
+		// setTask([...update_task]);
+		// console.log(task);
+		// setCheck(!true);
+		
+	}
+
+	
 	return (
 		<div className='task_component'>
 			<div className='task_header'>
@@ -76,9 +89,9 @@ function Task() {
 			{
 				task.map((taskList, i) => {
 					return (<div className='task_preview' key={i} index={i}>
-						<div id='taskName' style={{ textDecoration: check ? 'line-through' : '' }}>{taskList.taskName}</div>
-						<div className='check_task' onClick={() => { setCheck(!check) }}
-							style={{ color: check ? 'green' : 'white' }}><FaCheckCircle /></div>
+						<div id='taskName' style={{ textDecoration: taskList.taskCheck ? 'line-through' : '' }}>{taskList.taskName}</div>
+						<div className='check_task' onClick={() => { check_task(taskList.taskId) }}
+							style={{ color: taskList.taskCheck ? 'green' : 'white' }}><FaCheckCircle /></div>
 						<div className='delete_task' onClick={() => { deleteTask(taskList.taskId) }}><FaTrash /></div>
 					</div>)
 				})

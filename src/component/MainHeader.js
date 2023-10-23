@@ -10,9 +10,9 @@ let pomodoroTime = 25;
 let shortbreacktime = 5;
 let longbreacktime = 15;
 const mainInput = {
-	pomodoroTime:pomodoroTime,
-	shortBreakTime:shortbreacktime,
-	longBreakTime:longbreacktime
+	pomodoro:pomodoroTime,
+	shortBreak:shortbreacktime,
+	longBreak:longbreacktime
 }
 const [inputTime,setInputTime]=useState(mainInput)
 const [time,setTime]=useState('')
@@ -57,22 +57,22 @@ props.time(time)
 					<div className=" time_input_div">
 						<div className=" input_div">
 							<label className=" lable_name">Pomodoro</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.pomodoroTime} disabled
-							onChange={e=>{setInputTime({pomodoroTime:e.target.value,shortBreakTime:inputTime.shortBreakTime,longBreakTime:inputTime.longBreakTime})}}/>
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.pomodoro} 
+							onChange={e=>{setInputTime({pomodoro:e.target.value,shortBreak:inputTime.shortBreak,longBreak:inputTime.longBreak})}}/>
 						</div>
 						<div className=" input_div">
 							<label className=" lable_name">Short Break</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.shortBreakTime} disabled
-							onChange={e=>{setInputTime({pomodoroTime:inputTime.pomodoroTime,shortBreakTime:e.target.value,longBreakTime:inputTime.longBreakTime})}}/>
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.shortBreak} 
+							onChange={e=>{setInputTime({pomodoro:inputTime.pomodoro,shortBreak:e.target.value,longBreak:inputTime.longBreak})}}/>
 						</div>
 						<div className=" input_div">
 							<label className=" lable_name">Long Break</label>
-							<input type="number" min="0" step="1" className="number_input" value={inputTime.longBreakTime} disabled
-							onChange={e=>{setInputTime({pomodoroTime:inputTime.pomodoroTime,shortBreakTime:inputTime.shortBreakTime,longBreakTime:e.target.value})}}/>
+							<input type="number" min="0" step="1" className="number_input" value={inputTime.longBreak} 
+							onChange={e=>{setInputTime({pomodoro:inputTime.pomodoro,shortBreak:inputTime.shortBreak,longBreak:e.target.value})}}/>
 						</div>
 					</div>
 					<div className='setting_done_btn'>
-						<button className='done_btn d-none' onClick={setting_done} >Done</button>
+						<button className='done_btn ' onClick={setting_done} >Done</button>
 					</div>
 				</div>
 		</div>}
