@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Productive-pomo/static/css/main.2e52c755.css",
-    "main.js": "/Productive-pomo/static/js/main.1dabd646.js",
+    "main.css": "/Productive-pomo/static/css/main.0bca7aad.css",
+    "main.js": "/Productive-pomo/static/js/main.963d5047.js",
     "static/js/845.85907b51.chunk.js": "/Productive-pomo/static/js/845.85907b51.chunk.js",
     "static/js/787.ad30ee9b.chunk.js": "/Productive-pomo/static/js/787.ad30ee9b.chunk.js",
     "static/media/music.wav": "/Productive-pomo/static/media/music.25ab2e40b74cf4a55dfa.wav",
     "index.html": "/Productive-pomo/index.html",
-    "main.2e52c755.css.map": "/Productive-pomo/static/css/main.2e52c755.css.map",
-    "main.1dabd646.js.map": "/Productive-pomo/static/js/main.1dabd646.js.map",
+    "main.0bca7aad.css.map": "/Productive-pomo/static/css/main.0bca7aad.css.map",
+    "main.963d5047.js.map": "/Productive-pomo/static/js/main.963d5047.js.map",
     "845.85907b51.chunk.js.map": "/Productive-pomo/static/js/845.85907b51.chunk.js.map",
     "787.ad30ee9b.chunk.js.map": "/Productive-pomo/static/js/787.ad30ee9b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e52c755.css",
-    "static/js/main.1dabd646.js"
+    "static/css/main.0bca7aad.css",
+    "static/js/main.963d5047.js"
   ]
 }
