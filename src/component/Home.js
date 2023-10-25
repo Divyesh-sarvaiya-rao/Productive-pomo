@@ -6,20 +6,15 @@ import Task from './Task.js';
 import sound from '../sounds/music.wav';
 
 function Home(props) {
-  // console.log('home component Time :',props.taskTime);
-  // let pomodoroTime = props.taskTime ? props.taskTime.pomodoro * 60 : 25 * 60;
-  // let shortbreacktime = props.taskTime ? props.taskTime.shortBreak * 60 : 5 * 60;
-  // let longbreacktime = props.taskTime ? props.taskTime.longBreak * 60 : 15 *60;
- 
-  let pomodoroTime = 25 ;
-  let shortbreacktime = 5 ;
-  let longbreacktime =  15;
- 
-  // console.log('homeTime::',pomodoroTime);
+
+  let pomodoroTime = 25 *60;
+  let shortbreacktime = 5 *60;
+  let longbreacktime =  15*60;
+  
   let mainTime = {
-    pomodoro: pomodoroTime*60,
-    shortBreak: shortbreacktime*60,
-    longBreak: longbreacktime*60
+    pomodoro: pomodoroTime,
+    shortBreak: shortbreacktime,
+    longBreak: longbreacktime
   }
   const bgcolorType = {
     color: 'rgb(186, 73, 73)',
@@ -45,21 +40,6 @@ function Home(props) {
   const firstStart = useRef(true);
   const tick = useRef();
 
-  // if (props.taskTime.pomodoro) {
-  //   // console.log('set timer called', mainTime);
-  //   setTimer(mainTime);
-  // }
-  // if (props && props.taskTime) {
-  //   pomodoroTime=props.taskTime.pomodoroTime;
-  //   shortbreacktime=props.taskTime.shortBreakTime;
-  //   longbreacktime=props.taskTime.longbreacktime;
-  //   const mainTime = {
-  //     pomodoro: pomodoroTime * 60,
-  //     shortBreak: shortbreacktime * 60,
-  //     longBreak: longbreacktime * 60
-  //   }
-  //   setTimer(mainTime)
-  // }
   useEffect(() => {
     if (firstStart.current) {
       console.log("first render, don't run useEffect for timer");
@@ -79,7 +59,7 @@ function Home(props) {
           time = { pomodoro: pomodoroTime, shortBreak: shortbreacktime, longBreak: longbreacktime }
           }
         } else {
-          time = { pomodoro: timer.pomodoro - 1, shortBreak: shortbreacktime, longBreak: longbreacktime }
+          time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak }
         }
         console.log("mainClock called : ", time);
       }
@@ -94,7 +74,7 @@ function Home(props) {
           clickedbuttonhandler('first');
           time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
         } else {
-          time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: longbreacktime }
+          time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: timer.longBreak }
         }
       }
       else if (bgcolor.type === 'longClock') {
@@ -108,7 +88,7 @@ function Home(props) {
           clickedbuttonhandler('first');
           time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
         } else {
-          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: timer.longBreak - 1 }
+          time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak, longBreak: timer.longBreak - 1 }
         }
       }
         setTimer(() => timer = time);
@@ -162,17 +142,27 @@ function Home(props) {
       taskName='Time to Longbreak!'
     }
     
-
-    const[visible,setVisible] =useState(false);
-
-const [inputTime,setInputTime]=useState(mainTime)
-const [time,setTime]=useState('')
+let user_set_time={
+  pomodoro:25,
+  shortBreak:5,
+  longBreak:10
+}
+const[visible,setVisible] =useState(false);
+const [inputTime,setInputTime]=useState(user_set_time)
 const setting_done=()=>{
 	setVisible(false);
-	setTime(inputTime);
+  let user_time={
+    pomodoro:inputTime.pomodoro*60,
+    shortBreak:inputTime.shortBreak*60,
+    longBreak:inputTime.longBreak*60
+  }
+  console.log('User input time :',inputTime);
+  setTimer(user_time);
+  setInputTime(user_set_time);
 }
   return (
     <>
+    {/* header component start here */}
     <div className='header'>
 			<h4 className='header-text'>
 					<div>
@@ -226,7 +216,9 @@ const setting_done=()=>{
 					</div>
 				</div>
 		</div>}
-      <div className='home_component' style={{ backgroundColor: bgcolor.color }}>
+    {/* Home component start here */}
+
+    { !visible&& <div className='home_component' style={{ backgroundColor: bgcolor.color }}>
     
         <div className='first_row'>
 
@@ -262,7 +254,7 @@ const setting_done=()=>{
           <Task />
 
         </div>
-      </div>
+      </div>}
     </>
   );
 }

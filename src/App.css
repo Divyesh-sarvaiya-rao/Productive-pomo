@@ -3,6 +3,29 @@ body{
    overflow-x: hidden;
    font-family: 'ArialRounded', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
  }
+ /* scrollar design 
+ /* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(168, 165, 165); 
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #afaeae; 
+}
+
  /* .main{
    padding-left: 25%;
    padding-right: 25%;
@@ -362,7 +385,7 @@ body{
 .setting_done_btn {
   padding: 14px 20px;
   text-align: right;
-  margin-top: 30%;
+  margin-top: 25%;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
@@ -388,4 +411,85 @@ body{
 .check_task{
   margin-right: 2%;
   cursor: pointer;
+}
+
+
+/* .showLeft{
+  background-color: #0d77b6 !important;
+  border:1px solid #0d77b6 !important;
+  text-shadow: none !important;
+  color:#fff !important;
+  padding:10px;
+} */
+
+.icons li {
+  background: none repeat scroll 0 0 #fff;
+  height: 7px;
+  width: 7px;
+  line-height: 0;
+  list-style: none outside none;
+  margin-right: 15px;
+  margin-top: 3px;
+  vertical-align: top;
+  border-radius:50%;
+  pointer-events: none;
+}
+
+.btn-right {
+  right: 0.2em;
+}
+
+.btn-left, .btn-right {
+  position: absolute;
+  top: 0.24em;
+}
+
+.dropbtn {
+  /* background-color: #4CAF50; */
+  /* position: fixed; */
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  /* position: fixed; */
+  display: inline;
+  float: right;
+  /* right: 0.4em; */
+}
+
+.dropdown-content {
+  border-radius: 4px;
+    opacity: 1;
+    padding: 4px 0px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 20px, rgba(0, 0, 0, 0.1) 0px 3px 6px;
+    display: block;
+    pointer-events: auto;
+    position: absolute;
+    margin-top: 2em;
+    background-color: white;
+    transform: translateY(10px);
+    width: 150px;
+    right: 0px;
+    z-index: 1;
+  /* display:inline;
+  position: absolute;
+  margin-top: 60px;
+  background-color: #f9f9f9;
+  width:100px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; */
+}
+.clear_btn{
+  border: none;
+  outline: none;
+  /* margin-left: 20px; */
+  font-size:smaller;
+  width: 150px;
+  background-color: transparent;
+  padding: 5%;
+  /* width: 30; */
 }

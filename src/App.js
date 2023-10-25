@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 // import MainHeader from './component/MainHeader.js'
 import Home from './component/Home.js'
 

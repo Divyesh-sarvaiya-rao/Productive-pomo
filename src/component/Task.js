@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaBars,FaCheckCircle,FaTrash,FaPlusCircle } from "react-icons/fa";
+import { FaCheckCircle,FaTrash,FaPlusCircle } from "react-icons/fa";
 
 function Task() {
 	const [visible, setVisible] = useState(false);
@@ -46,44 +46,38 @@ function Task() {
 		}
 	}
 	const check_task = (id) => {
-		console.log("check task called ::",id);
+		console.log("Task checked with ID:",id);
 		const newTask = task.filter((tasklist)=>{
-		// // 	// const deleteTask = task.filter((tasklist)=>tasklist.taskId !==id);
-		// // 	// setTask([...deleteTask])
+
 			if (tasklist.taskId===id) {
-				let updated_task={
-					taskId:new Date().getTime().toString(),
-					taskName:tasklist.taskName,
-					taskTime:tasklist.taskTime,
-					taskCheck:true
-				}
-				// task.push(updated_task);
-				setTask([...task,updated_task])
-
+				tasklist.taskCheck=!tasklist.taskCheck;
+				console.log("Task check is :",tasklist.taskCheck);
 			}
-		return task;
+			return task;
 		});
-		// localStorage.setItem('added_task', JSON.stringify(newTask));
-
-		// let newtask = task.filter((tasklist)=> tasklist.taskId !== id);
-		// // newTask.splice(id, 1)
-		// setTask([...task,newtask]);
-		console.log(newTask);
-
-		// let update_task = task.filter((tasklist)=> tasklist.taskId !== id);
-		// setTask([...update_task]);
-		// console.log(task);
-		// setCheck(!true);
-		
+			setTask([...newTask]);
+			localStorage.setItem('added_task', JSON.stringify(newTask));
 	}
 
-	
+	const [menuvisible, setMenuVisible] = useState(false);
+	const clear_task=()=>{
+		console.log('clear task called :');
+		setTask([]);
+		localStorage.removeItem('added_task');
+	}
 	return (
 		<div className='task_component'>
 			<div className='task_header'>
 				<span>Tasks</span>
-				<div className='dots_menu'>
-					<FaBars />
+				<div className='dropdown'>
+					<ul className='dropbtn icons btn-right showleft' onClick={()=>setMenuVisible(!menuvisible)}>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					{menuvisible &&<div className='dropdown-content'>
+						<button className='clear_btn' onClick={()=>{clear_task();setMenuVisible(false)}}>Clear all task</button>
+					</div>}
 				</div>
 			</div>
 			{
