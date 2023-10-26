@@ -64,7 +64,7 @@ function Home() {
           clearInterval(tick.current);
           setStart(false);
           if(window.confirm("Your task is completed Do you want to Reset this clock ")){
-          time = { pomodoro: pomodoroTime, shortBreak: shortbreacktime, longBreak: longbreacktime }
+          time = { pomodoro: mainTime.pomodoro, shortBreak: mainTime.shortBreak, longBreak: mainTime.longBreak }
           }
         } else {
           time = { pomodoro: timer.pomodoro - 1, shortBreak: timer.shortBreak, longBreak: timer.longBreak }
@@ -80,7 +80,7 @@ function Home() {
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
           clickedbuttonhandler('first');
-          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
+          time = { pomodoro: mainTime.pomodoro, shortBreak: mainTime.shortBreak, longBreak: mainTime.longBreak }
         } else {
           time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak - 1, longBreak: timer.longBreak }
         }
@@ -94,7 +94,7 @@ function Home() {
           backgroundChange("rgb(186, 73, 73)", "mainClock");
           pomodorotime();
           clickedbuttonhandler('first');
-          time = { pomodoro: timer.pomodoro, shortBreak: shortbreacktime, longBreak: longbreacktime }
+          time = { pomodoro: mainTime.pomodoro, shortBreak: mainTime.shortBreak, longBreak: mainTime.longBreak }
         } else {
           time = { pomodoro: timer.pomodoro, shortBreak: timer.shortBreak, longBreak: timer.longBreak - 1 }
         }
