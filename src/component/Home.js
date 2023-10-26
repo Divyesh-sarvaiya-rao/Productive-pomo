@@ -3,19 +3,27 @@ import { FaCheckCircle } from "react-icons/fa";
 import useSound from 'use-sound';
 import Timer from './Timer.js';
 import Task from './Task.js';
-import sound from '../sounds/music.wav';
+import sound from '../sounds/music2.wav';
 
-function Home(props) {
+function Home() {
 
   let pomodoroTime = 25 *60;
   let shortbreacktime = 5 *60;
   let longbreacktime =  15*60;
   
-  let mainTime = {
-    pomodoro: pomodoroTime,
-    shortBreak: shortbreacktime,
-    longBreak: longbreacktime
+  let locaSetTime = localStorage.getItem('userSetTime');
+  let mainTime;
+  if (locaSetTime) {
+    mainTime=JSON.parse(locaSetTime)
   }
+  else{
+    mainTime = {
+      pomodoro: pomodoroTime,
+      shortBreak: shortbreacktime,
+      longBreak: longbreacktime
+    }
+  }
+
   const bgcolorType = {
     color: 'rgb(186, 73, 73)',
     type: 'mainClock'
@@ -123,6 +131,7 @@ function Home(props) {
   const pomodorotime = () => {
     console.log("pomodoro function called :")
     // setTimer(time);  
+    console.log(window.statusbar);
   }
   const shortBreack = () => {
     console.log("shortBreack function called : ")
@@ -142,10 +151,21 @@ function Home(props) {
       taskName='Time to Longbreak!'
     }
     
-let user_set_time={
-  pomodoro:25,
-  shortBreak:5,
-  longBreak:10
+let user_set_time;
+if (locaSetTime) {
+  const setTime=JSON.parse(locaSetTime); 
+  user_set_time={
+    pomodoro:setTime.pomodoro/60,
+    shortBreak:setTime.shortBreak/60,
+    longBreak:setTime.longBreak/60
+  };
+}
+else{
+  user_set_time={
+    pomodoro:25,
+    shortBreak:5,
+    longBreak:15
+  }
 }
 const[visible,setVisible] =useState(false);
 const [inputTime,setInputTime]=useState(user_set_time)
@@ -158,7 +178,8 @@ const setting_done=()=>{
   }
   console.log('User input time :',inputTime);
   setTimer(user_time);
-  setInputTime(user_set_time);
+  localStorage.setItem('userSetTime',JSON.stringify(user_time));
+  // setInputTime(user_set_time);
 }
   return (
     <>
@@ -249,7 +270,7 @@ const setting_done=()=>{
 
           </div>
 
-          <div className='pomodoro_count text-center'>#1</div>
+          {/* <div className='pomodoro_count text-center'>#1</div> */}
         <div className='taskName text-center'>{taskName}</div>
           <Task />
 

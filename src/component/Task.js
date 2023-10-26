@@ -6,7 +6,7 @@ function Task() {
 	const close_taskaddbox = () => {
 		setVisible(false)
 	}
-	const initial = { taskName: '', taskTime: '' }
+	const initial = { taskName: ''}
 	let data = localStorage.getItem('added_task')
 	let array;
 	if (data) {
@@ -26,7 +26,6 @@ function Task() {
 			let inputTask = {
 				taskId: new Date().getTime().toString(),
 				taskName: inputText.taskName,
-				taskTime: inputText.taskTime,
 				taskCheck:false
 			}
 			setTask([...task, inputTask])
@@ -96,10 +95,10 @@ function Task() {
 
 			{visible && <div className='task_add_box'>
 				<input type='text' className='task_name_input' placeholder='What are you working on?' value={inputText.taskName}
-					onChange={e => { setInputText({ taskName: e.target.value, taskTime: inputText.taskTime }) }} />
-				<span>Est Pomodoros</span><br />
-				<input type='number' className='number_input' min='0' step='1' placeholder="Est Time" value={inputText.taskTime}
-					onChange={e => { setInputText({ taskName: inputText.taskName, taskTime: e.target.value }) }} />
+					onChange={e => { setInputText({ taskName: e.target.value, }) }} />
+				{/* <span>Est Pomodoros</span><br /> */}
+				{/* <input type='number' className='number_input' min='0' step='1' placeholder="Est Time" value={inputText.taskTime}
+					onChange={e => { setInputText({ taskName: inputText.taskName, taskTime: e.target.value }) }} /> */}
 				<div className='btn_div'>
 					<button className='cancel_btn' onClick={close_taskaddbox}>Cancel</button>
 					<button className='save_btn' onClick={() => { submit(); close_taskaddbox() }}>Save</button>

@@ -192,15 +192,6 @@ body{
      background-color: white;
      transition: color 0.5s ease-in-out 0s;
  }
- .pomodoro_count{
-   color: whitesmoke;
-   font-size: 16px;
-   width: 20px;
-   cursor: pointer;
-   user-select: none;
-   margin: auto;
-   margin-top: 3%;
- }
  .taskName{
    font-size: 20px;
    color: white;
@@ -276,10 +267,12 @@ body{
    font-weight: bold;
    margin-top: 10px;
  }
+ FaCheckCircle{
+  border: 1px solid blue;
+ }
  .btn_div{
-   margin-top: 80px;
+   margin-top: 30%;
    float: right;
- /*  width: 100%;*/
    background-color: rgb(239, 239, 239);
  }
  .cancel_btn{
@@ -318,7 +311,7 @@ body{
      display:flex;
      align-items: center;
      width: 100%;
-     background-color: #dedede;
+     background-color: #cac6c6;
      padding: 13px;
      font-size: x-large;
      margin-top: 2%;
@@ -412,16 +405,6 @@ body{
   margin-right: 2%;
   cursor: pointer;
 }
-
-
-/* .showLeft{
-  background-color: #0d77b6 !important;
-  border:1px solid #0d77b6 !important;
-  text-shadow: none !important;
-  color:#fff !important;
-  padding:10px;
-} */
-
 .icons li {
   background: none repeat scroll 0 0 #fff;
   height: 7px;
@@ -445,8 +428,6 @@ body{
 }
 
 .dropbtn {
-  /* background-color: #4CAF50; */
-  /* position: fixed; */
   color: white;
   font-size: 16px;
   border: none;
@@ -454,10 +435,8 @@ body{
 }
 
 .dropdown {
-  /* position: fixed; */
   display: inline;
   float: right;
-  /* right: 0.4em; */
 }
 
 .dropdown-content {
@@ -474,22 +453,12 @@ body{
     width: 150px;
     right: 0px;
     z-index: 1;
-  /* display:inline;
-  position: absolute;
-  margin-top: 60px;
-  background-color: #f9f9f9;
-  width:100px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1; */
 }
 .clear_btn{
   border: none;
   outline: none;
-  /* margin-left: 20px; */
   font-size:smaller;
   width: 150px;
   background-color: transparent;
   padding: 5%;
-  /* width: 30; */
 }
