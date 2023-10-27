@@ -25,8 +25,9 @@ function Task() {
 		} else {
 			let inputTask = {
 				taskId: new Date().getTime().toString(),
-				taskName: inputText.taskName,
-				taskCheck:false
+				taskName: inputText.taskName.trim(),
+				taskCheck:false,
+				taskDate:new Date().toString().slice(0, 10)
 			}
 			setTask([...task, inputTask])
 			setInputText(initial);
@@ -81,10 +82,13 @@ function Task() {
 			</div>
 			{
 				task.map((taskList, i) => {
-					return (<div className='task_preview' key={i} index={i}>
-						<div id='taskName' style={{ textDecoration: taskList.taskCheck ? 'line-through' : '' }}>{taskList.taskName}</div>
+					return (<div className='task_preview' key={i} index={i} title={"Task Created : "+taskList.taskDate}
+					style={{backgroundColor: taskList.taskCheck ? '#979797' :'#cac6c6'}}>
 						<div className='check_task' onClick={() => { check_task(taskList.taskId) }}
 							style={{ color: taskList.taskCheck ? 'green' : 'white' }}><FaCheckCircle /></div>
+						<div id='taskName' style={{ textDecoration: taskList.taskCheck ? 'line-through' : '' }}>{taskList.taskName}
+						<div className='task_date'>Task Created on : {taskList.taskDate}</div>
+						</div>
 						<div className='delete_task' onClick={() => { deleteTask(taskList.taskId) }}><FaTrash /></div>
 					</div>)
 				})

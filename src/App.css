@@ -95,9 +95,14 @@ body{
    border-radius: 8px;
    background-color: #ffffff24;
  }
-  @media(max-width:900px) {
+  @media(min-width:900px) {
     .second_row {
      width:100%;
+  }
+}
+@media(max-width:375px){
+  .number_input{
+    width: 100%;
   }
 }
 @media(min-width:900px) {
@@ -312,12 +317,13 @@ body{
      align-items: center;
      width: 100%;
      background-color: #cac6c6;
-     padding: 13px;
-     font-size: x-large;
+     padding: 10px;
+     font-size: large;
      margin-top: 2%;
-     border-radius: 10px;
+     border-radius: 5px;
      font-weight: 400;
      text-transform: capitalize;
+     border-left: 5px solid black;
  } 
   .task_preview .delete_task{
    float: right;
@@ -326,6 +332,9 @@ body{
  }
  #taskName{
    width: 100%;
+ }
+ .task_date{
+  font-size:x-small;
  }
  .checkTask{
    margin-right: 2%;
@@ -398,6 +407,24 @@ body{
   min-width: 70px;
   background-color: rgb(34, 34, 34);
   border: 2px solid rgb(34, 34, 34);
+  display: inline-block;
+}.reset_btn{
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: rgba(243, 221, 221, 0.2) 0px 2px 2px;
+  color: white;
+  opacity: 0.9;
+  font-size: 14px;
+  margin-right: 3%;
+  padding: 8px 12px;
+  min-width: 70px;
+  background-color: rgb(121, 118, 118);
+  border: 2px solid rgb(148, 145, 145);
   display: inline-block;
 }
 
