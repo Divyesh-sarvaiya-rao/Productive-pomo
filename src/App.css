@@ -41,6 +41,7 @@ body{
  }
  .header-text{
     margin-left: 8px;
+    user-select: none;
      display: inline-block;
      color: white;
  /*    margin: 0px;*/
